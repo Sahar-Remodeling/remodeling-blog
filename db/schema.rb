@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_05_125211) do
+ActiveRecord::Schema.define(version: 2018_11_04_075512) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -103,6 +103,13 @@ ActiveRecord::Schema.define(version: 2018_09_05_125211) do
     t.index ["site_id"], name: "index_cama_media_on_site_id"
   end
 
+  create_table "cama_meta", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "object_class"
+    t.integer "objectid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cama_metas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key"
     t.text "value", limit: 4294967295
@@ -189,6 +196,16 @@ ActiveRecord::Schema.define(version: 2018_09_05_125211) do
     t.index ["role"], name: "index_cama_users_on_role"
     t.index ["site_id"], name: "index_cama_users_on_site_id"
     t.index ["username"], name: "index_cama_users_on_username"
+  end
+
+  create_table "plugins_attacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "path"
+    t.string "browser_key"
+    t.bigint "site_id"
+    t.datetime "created_at"
+    t.index ["browser_key"], name: "index_plugins_attacks_on_browser_key"
+    t.index ["path"], name: "index_plugins_attacks_on_path"
+    t.index ["site_id"], name: "index_plugins_attacks_on_site_id"
   end
 
   create_table "plugins_contact_forms", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

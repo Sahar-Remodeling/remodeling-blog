@@ -1,0 +1,70 @@
+<section class="">
+        <div class="container">
+			  <div class="row">
+				  <div class="col-md-8">
+					  <div class="main-article">
+							<div class="main-article-img">
+								<a href="/<%= @featured_post.slug %>">
+									<img src="<%= @feature_image %>" alt="" class="img-responsive mt-md-50">
+								</a>
+							</div>
+					  	<a href="/<%= @featured_post.slug %>">
+								<h1 class="mt-md-30 text-gray-dark"><%= @featured_post.title %></h1>
+							</a>
+				      	<p class="mt-md-20 p-lg"><%= @featured_post.content_filtered[0...120]%> ...</p>
+					  	<a href="/<%= @featured_post.slug %>">Continue reading</a>
+					  </div>
+					  <hr class="mt-md-50 mb-md-50 mt-xs-30 mb-xs-30">
+					  <div class="recommended-articles">
+						  <h2 class="text-gray-dark mb-sm-30 mb-xs-20">Recommended Articles</h2>
+						  <div class="row">
+
+                <div class="mb-md-30">
+                <% @recommanded_posts.each do |post|
+                  @post_image = CamaMetas.find_by(objectid: post.id, object_class: 'Post', key: 'thumb').value
+                %>
+
+
+							  <div class="col-sm-6 col-xs-12">
+									<a href="/<%= post.slug %>" class="">
+						  			<img src="<%= @post_image %>" alt="" class="img-responsive" style="height: 203px !important; width: 360px !important">
+										<div class="recommended-text mb-md-50 mb-xs-20">
+											<h5 class="text-gray-dark"><%= post.title %></h5>
+											<a href="/<%= post.slug %>" class="mt-md-15">Read more</a>
+										</div>
+								  </a>
+							  </div>
+                <% end %>
+              </div>
+					  </div>
+            </div>
+					  <hr class="mt-md-0 mt-xs-30 mb-md-50 mb-xs-30">
+					  <div class="must-read">
+						  <h2 class="text-gray-dark mb-sm-30 mb-xs-20">Must Read Articles</h2>
+              <% @must_posts.each do |post|
+                @post_image = CamaMetas.find_by(objectid: post.id, object_class: 'Post', key: 'thumb').value
+              %>
+
+
+							<div class="row mb-md-50 mb-xs-20">
+								<div class="col-md-6">
+									<a href="/<%= post.slug %>">
+										<img src="<%= @post_image %>" class="img-responsive" alt="">
+									</a>
+								</div>
+								<div class="col-md-6">
+									<a href="/<%= post.slug %>">
+										<h3 class="text-gray-dark mb-md-20 mt-md-0 mt-xs-20"><%= post.title%></h3>
+									</a>
+                  <p class="mb-md-15"><%= post.content_filtered[0...60]%>...</p>
+									<a href="/<%= post.slug %>" class="btn btn-info btn-outline mb-md-0 mb-xs-30">Continue Reading</a>
+								</div>
+							</div>
+              <% end %>
+
+					  </div>
+				  </div>
+				  <%= render "layouts/sidebar" %>
+			  </div>
+       </div>
+      </section>

@@ -1,0 +1,25 @@
+<section class="">
+        <div class="container">
+			  <div class="row">
+				  <div class="col-md-8">
+					  <div class="article">
+							<h1 class=""><%= @post.title%></h1>
+              <% @post_tags.each do |tag| %>
+							<span class="label label-success"> <%= tag.name%></span>
+              <% end %>
+							<span class="date"><%= @post.created_at.strftime("%B %d, %Y")
+%></span>
+              <%
+              post_image = CamaMetas.find_by(objectid: @post.id, object_class: 'Post', key: 'thumb').value
+
+              %>
+							<img src="<%= post_image%>" alt="" class="img-responsive" style="width:750px !important; height:462px !important">
+							<%= @post.content.html_safe%>
+					  </div>
+				  </div>
+				  <%= render "layouts/sidebar" %>
+			  </div>
+
+
+          </div>
+      </section>
